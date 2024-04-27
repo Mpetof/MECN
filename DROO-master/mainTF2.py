@@ -100,11 +100,12 @@ if __name__ == "__main__":
 
     start_time=time.time()
 
-    rate_his = []
-    rate_his_ratio = []
-    mode_his = []
-    k_idx_his = []
-    K_his = []
+    rate_his = [] 
+    rate_his_ratio = [] #normalized computation rate
+    mode_his = [] #offloading mode
+    k_idx_his = [] #max K
+    K_his = [] #Current K choice 
+    
     for i in range(n):
         if i % (n//10) == 0:
            print("%0.1f"%(i/n))
@@ -127,7 +128,8 @@ if __name__ == "__main__":
 
         # the action selection must be either 'OP' or 'KNN'
         m_list = mem.decode(h, K, decoder_mode)
-
+        print (m_list)
+        
         r_list = []
         for m in m_list:
             r_list.append(bisection(h/1000000, m)[0])
