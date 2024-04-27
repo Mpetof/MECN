@@ -15,6 +15,7 @@ import numpy as np
 print(tf.__version__)
 print(tf.keras.__version__)
 
+tf.test.is_gpu_available()
 
 # DNN network for memory
 class MemoryDNN:
@@ -56,7 +57,7 @@ class MemoryDNN:
                     layers.Dense(self.net[-1], activation='sigmoid')  # the output layer
                 ])
 
-        self.model.compile(optimizer=keras.optimizers.Adam(lr=self.lr), loss=tf.losses.binary_crossentropy, metrics=['accuracy'])
+        self.model.compile(optimizer=keras.optimizers.Adam(learning_rate=self.lr), loss=tf.losses.binary_crossentropy, metrics=['accuracy'])
 
     def remember(self, h, m):
         # replace the old memory with new memory
