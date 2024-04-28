@@ -15,8 +15,14 @@ import numpy as np
 print(tf.__version__)
 print(tf.keras.__version__)
 
-tf.test.is_gpu_available()
-
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+    print(f"Num GPUs Available: {len(gpus)}")
+    for gpu in gpus:
+        print(gpu)
+else:
+    print("No GPU available.")
+    
 # DNN network for memory
 class MemoryDNN:
     def __init__(
