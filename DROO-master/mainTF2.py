@@ -128,7 +128,6 @@ if __name__ == "__main__":
 
         # the action selection must be either 'OP' or 'KNN'
         m_list = mem.decode(h, K, decoder_mode)
-        print (m_list)
         
         r_list = []
         for m in m_list:
