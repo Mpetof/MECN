@@ -132,7 +132,6 @@ if __name__ == "__main__":
         r_list = []
         for m in m_list:
             r_list.append(bisection(h/1000000, m)[0]) # can add weight here
-            
         
         # encode the mode with largest reward
         mem.encode(h, m_list[np.argmax(r_list)])
