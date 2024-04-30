@@ -140,9 +140,9 @@ class MemoryDNN:
             self.enumerate_actions = np.array(list(map(list, itertools.product([0, 1], repeat=self.net[0]))))
 
         # the 2-norm
-        sqd = ((self.enumerate_actions - m)**2).sum(1)
-        idx = np.argsort(sqd)
-        return self.enumerate_actions[idx[:k]]
+        sqd = ((self.enumerate_actions - m)**2).sum(1) 
+        idx = np.argsort(sqd) 
+        return self.enumerate_actions[idx[:k]] 
         
 
     def plot_cost(self):

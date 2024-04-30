@@ -44,7 +44,7 @@ def bisection(h, M, weights=[]):
     B=2*10**6
     Vu=1.1
     epsilon=B/(Vu*np.log(2))
-    x = [] # a =x[0], and tau_j = a[1:]
+    x = [] # a =x[0], and tau_j = a[1:], target variable
     
     M0=np.where(M==0)[0]
     M1=np.where(M==1)[0]
@@ -79,12 +79,12 @@ def bisection(h, M, weights=[]):
         return 1/(1 + p1 * eta2)
 
     def Q(v):
-        sum1 = sum(wi*eta1*(hi/ki)**(1.0/3))*p1(v)**(-2/3)/3
+        sum1 = sum(wi*eta1*(hi/ki)**(1.0/3))*p1(v)**(-2/3)/3 # lagarange derivative #1
         sum2 = 0
         for j in range(len(M1)):
-            sum2 += wj[j]*hj[j]**2/(1 + 1/phi(v,j))
+            sum2 += wj[j]*hj[j]**2/(1 + 1/phi(v,j))# lagarange derivative #2
         return sum1 + sum2*epsilon*eta2 - v
-
+    
     def tau(v, j):
         return eta2*hj[j]**2*p1(v)*phi(v,j)
 

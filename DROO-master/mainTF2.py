@@ -101,10 +101,10 @@ if __name__ == "__main__":
     start_time=time.time()
 
     rate_his = [] 
-    rate_his_ratio = [] #normalized computation rate
-    mode_his = [] #offloading mode
-    k_idx_his = [] #max K
-    K_his = [] #Current K choice 
+    rate_his_ratio = [] # normalized computation rate
+    mode_his = [] # offloading mode
+    k_idx_his = [] # max K
+    K_his = [] # Current K choice 
     
     for i in range(n):
         if i % (n//10) == 0:
@@ -131,8 +131,9 @@ if __name__ == "__main__":
         
         r_list = []
         for m in m_list:
-            r_list.append(bisection(h/1000000, m)[0])
+            r_list.append(bisection(h/1000000, m)[0]) # can add weight here
             
+        
         # encode the mode with largest reward
         mem.encode(h, m_list[np.argmax(r_list)])
         # the main code for DROO training ends here
