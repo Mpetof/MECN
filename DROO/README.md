@@ -16,4 +16,10 @@ Huang, Liang, Suzhi Bi, and Ying-Jun Angela Zhang. "Deep reinforcement learning 
 - Performance: The DROO framework not only reduces the computation time significantly (by more than an order of magnitude compared to existing methods) but also achieves near-optimal performance. It delivers extremely low CPU execution latencies (under 0.1 seconds in a network with 30 users), thus enabling real-time, optimal offloading even in fast fading environments.
 
 ## Key design
+![Problem assumption](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Problem%20assumption.png)
 
+![Optimizing structure](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Optimization%20structure.png)
+
+![Model structure](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Model%20structure.png)
+
+## Remark
