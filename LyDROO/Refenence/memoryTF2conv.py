@@ -1,8 +1,8 @@
 #  #################################################################
-#  This file contains the main DROO operations, including building DNN, 
+#  This file contains the main LyDROO operations, including building convolutional DNN, 
 #  Storing data sample, Training DNN, and generating quantized binary offloading decisions.
 
-#  version 1.0 -- January 2020. Written based on Tensorflow 2 by Weijian Pan and 
+#  version 1.0 -- January 2021. Written based on Tensorflow 2 
 #  Liang Huang (lianghuang AT zjut.edu.cn)
 #  #################################################################
 
@@ -15,14 +15,7 @@ import numpy as np
 print(tf.__version__)
 print(tf.keras.__version__)
 
-gpus = tf.config.list_physical_devices('GPU')
-if gpus:
-    print(f"Num GPUs Available: {len(gpus)}")
-    for gpu in gpus:
-        print(gpu)
-else:
-    print("No GPU available.")
-    
+
 # DNN network for memory
 class MemoryDNN:
     def __init__(
@@ -58,12 +51,18 @@ class MemoryDNN:
 
     def _build_net(self):
         self.model = keras.Sequential([
-                    layers.Dense(self.net[1], activation='relu'),  # the first hidden layer
-                    layers.Dense(self.net[2], activation='relu'),  # the second hidden layer
-                    layers.Dense(self.net[-1], activation='sigmoid')  # the output layer
+                    layers.Conv1D(32, 3, activation='relu',input_shape=[int(self.net[0]/3),3]), # first Conv1D with 32 channels and kearnal size 3
+                    layers.Conv1D(64, 3, activation='relu'), # second Conv1D with 32 channels and kearnal size 3
+                    layers.Conv1D(64, 3, activation='relu'), # second Conv1D with 32 channels and kearnal size 3
+                    layers.Flatten(),
+                    layers.Dense(64, activation='relu'),
+                    layers.Dense(self.net[-1], activation='sigmoid')
+                    # layers.Dense(self.net[1], activation='relu'),  # the first hidden layer
+                    # layers.Dense(self.net[2], activation='relu'),  # the second hidden layer
+                    # layers.Dense(self.net[-1], activation='sigmoid')  # the output layer
                 ])
-
-        self.model.compile(optimizer=keras.optimizers.Adam(learning_rate=self.lr), loss=tf.losses.binary_crossentropy, metrics=['accuracy'])
+# 
+        self.model.compile(optimizer=keras.optimizers.Adam(lr=self.lr), loss=tf.losses.binary_crossentropy, metrics=['accuracy'])
 
     def remember(self, h, m):
         # replace the old memory with new memory
@@ -89,6 +88,7 @@ class MemoryDNN:
         batch_memory = self.memory[sample_index, :]
         
         h_train = batch_memory[:, 0: self.net[0]]
+        h_train = h_train.reshape(self.batch_size,int(self.net[0]/3),3)
         m_train = batch_memory[:, self.net[0]:]
         
         # print(h_train)          # (128, 10)
@@ -102,14 +102,17 @@ class MemoryDNN:
 
     def decode(self, h, k = 1, mode = 'OP'):
         # to have batch dimension when feed into tf placeholder
+        h=h.reshape(10,3)
         h = h[np.newaxis, :]
 
-        m_pred = self.model.predict(h) 
+        m_pred = self.model.predict(h)
 
         if mode is 'OP':
             return self.knm(m_pred[0], k)
         elif mode is 'KNN':
             return self.knn(m_pred[0], k)
+        elif mode is 'OPN':
+            return self.opn(m_pred[0], k)
         else:
             print("The action selection must be 'OP' or 'KNN'")
     
@@ -132,6 +135,10 @@ class MemoryDNN:
                     m_list.append(1*(m - m[idx_list[i]] >= 0))
 
         return m_list
+
+    
+    def opn(self, m, k= 1):
+        return self.knm(m,k)+self.knm(m+np.random.normal(0,1,len(m)),k)
     
     def knn(self, m, k = 1):
         # list all 2^N binary offloading actions
@@ -140,9 +147,9 @@ class MemoryDNN:
             self.enumerate_actions = np.array(list(map(list, itertools.product([0, 1], repeat=self.net[0]))))
 
         # the 2-norm
-        sqd = ((self.enumerate_actions - m)**2).sum(1) 
-        idx = np.argsort(sqd) 
-        return self.enumerate_actions[idx[:k]] 
+        sqd = ((self.enumerate_actions - m)**2).sum(1)
+        idx = np.argsort(sqd)
+        return self.enumerate_actions[idx[:k]]
         
 
     def plot_cost(self):

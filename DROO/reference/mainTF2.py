@@ -109,6 +109,7 @@ if __name__ == "__main__":
     for i in range(n):
         if i % (n//10) == 0:
            print("%0.1f"%(i/n))
+           
         if i> 0 and i % Delta == 0:
             # index counts from 0
             if Delta > 1:
