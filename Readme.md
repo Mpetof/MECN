@@ -13,10 +13,10 @@ This repository summarizes the papers, codes, and tools for mobile edge task off
 
 ## Task graph allocation in Single MD
 - **2020**
-    - Offloading and Resource Allocation With General Task Graph in Mobile Edge Computing: A Deep Reinforcement Learning Approach, Yan, Jia, Suzhi Bi, and Ying-Jun Angela Zhang. [Paper](https://ieeexplore.ieee.org/abstract/document/9093962/); [Code](https://github.com/yourusername/repositoryname/tree/main/GeneralTaskGraph)
+    - Offloading and Resource Allocation With General Task Graph in Mobile Edge Computing: A Deep Reinforcement Learning Approach, Yan, Jia, Suzhi Bi, and Ying-Jun Angela Zhang. [Paper](https://ieeexplore.ieee.org/abstract/document/9093962/); [Code](https://github.com/Mpetof/MECN/tree/main/GeneralTaskGraph)
 
 - **2021**
-    - Multihop Offloading of Multiple DAG Tasks in Collaborative Edge Computing, Sahni, Yuvraj, et al. [Paper](https://ieeexplore.ieee.org/abstract/document/9223724/); [Code](https://github.com/yourusername/repositoryname/tree/main/MultihopOffloading)
+    - Multihop Offloading of Multiple DAG Tasks in Collaborative Edge Computing, Sahni, Yuvraj, et al. [Paper](https://ieeexplore.ieee.org/abstract/document/9223724/); [Code](https://github.com/Mpetof/MECN/tree/main/MultihopOffloading)
 
 ## Paper code on going
 - **2021**
