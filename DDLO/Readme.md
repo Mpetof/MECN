@@ -16,8 +16,6 @@ Huang, Liang, et al. "Distributed deep learning-based offloading for mobile edge
 - Performance: The proposed algorithm achieves near-optimal offloading decisions in less than a second, converging to optimal performance when two or more DNNs are used. It demonstrates effectiveness under various parameter settings, making it suitable for real-time offloading in MEC networks.
 
 ## Key design
-![Problem assumption](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Problem%20assumption.png)
+![Problem assumption](https://github.com/Mpetof/MECN/blob/main/DDLO/Figure/model%20architechture.png)
 
-![Optimizing structure](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Optimization%20structure.png)
-
-![Model structure](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Model%20structure.png)
+![Optimizing structure](https://github.com/Mpetof/MECN/blob/main/DDLO/Figure/memory.png)
