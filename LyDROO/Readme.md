@@ -18,6 +18,4 @@ Bi, Suzhi, et al. "Lyapunov-guided deep reinforcement learning for stable online
 ## Key design
 ![Problem assumption](https://github.com/Mpetof/MECN/blob/main/LyDROO/Figure/System%20mode.png)
 
-![Optimizing structure](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Optimization%20structure.png)
-
-![Model structure](https://github.com/Mpetof/MECN/blob/main/DROO/Figure/Model%20structure.png)
+![Optimizing structure](https://github.com/Mpetof/MECN/blob/main/LyDROO/Figure/Optimization%20structure.png)
