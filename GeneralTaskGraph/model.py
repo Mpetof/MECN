@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 import numpy as np
+from scipy.special import expit
 
 class Model:
     def __init__(
@@ -37,7 +38,14 @@ class Model:
     def decode (self, h, K) :
         h = h[np.newaxis, :] # fit DNN dimension
         x_pred = self.model.predict (h)
-        return self.quanti (x_pred [0], K) # quantization step
+        x1 = self.quanti (x_pred[0], K)
+        
+        noise = np.random.normal(0, 1, self.net[-1])
+        x_noise = x_pred[0] + noise
+        x_sigmoid = expit(x_noise)
+        x2 = self.quanti (x_sigmoid, K)
+        
+        return x1 + x2 # quantization step
     
     def quanti (self, x, K):
         x_list = [] 
@@ -78,7 +86,7 @@ class Model:
         h_train = batch_memory [:, 0 : self.net[0]]
         x_train = batch_memory [:, self.net[0] : ]
         
-        fitting = self.model.fit (h_train, x_train, verbose=0)
+        fitting = self.model.fit (h_train, x_train, verbose=1)
         
         loss = fitting.history ["loss"][0]
         assert(loss > 0)
