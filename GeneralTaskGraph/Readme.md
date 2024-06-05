@@ -16,6 +16,6 @@ Yan, Jia, Suzhi Bi, and Ying Jun Angela Zhang. "Offloading and resource allocati
 - Performance: Numerical results indicate that the proposed algorithm achieves up to 99.1% of the optimal performance while markedly reducing computational complexity compared to traditional optimization methods
 
 ## Key design
-![Problem assumption](https://github.com/Mpetof/MECN/blob/main/DDLO/Figure/model%20architechture.png)
+![Problem assumption](https://github.com/Mpetof/MECN/blob/main/GeneralTaskGraph/Figure/Task%20graph.png)
 
-![Optimizing structure](https://github.com/Mpetof/MECN/blob/main/DDLO/Figure/memory.png)
+![Optimizing structure](https://github.com/Mpetof/MECN/blob/main/GeneralTaskGraph/Figure/Model%20structure.png)
